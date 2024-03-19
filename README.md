@@ -1,1 +1,1 @@
-# csp-checker
+# CSP Checker
