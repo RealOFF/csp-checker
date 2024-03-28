@@ -3,12 +3,20 @@ import {
   createResourceFactory,
   ResourceType,
   DocumentWithDefaultView,
+  BaseResourceFactoryOptions,
+  isCspError,
 } from "./resources";
+
+type CheckOptions = BaseResourceFactoryOptions;
 
 export const createChecker = (cspConfiguration: string) => {
   const createResource = createResourceFactory();
 
-  return (url: string, resourceType: ResourceType) => {
+  return async (
+    url: string,
+    resourceType: ResourceType,
+    options: CheckOptions,
+  ) => {
     const sandbox = createSandbox(cspConfiguration);
     document.body.appendChild(sandbox);
 
@@ -16,9 +24,24 @@ export const createChecker = (cspConfiguration: string) => {
       throw new Error("contentWindow is not defined");
     }
 
-    createResource(resourceType)(
-      sandbox.contentWindow.document as DocumentWithDefaultView,
-      url,
-    );
+    try {
+      await createResource(resourceType)(
+        sandbox.contentWindow.document as DocumentWithDefaultView,
+        url,
+        options,
+      );
+
+      return true;
+    } catch (error: unknown) {
+      if (!(error instanceof Error)) {
+        throw error;
+      }
+
+      if (isCspError(error)) {
+        return false;
+      } else {
+        throw error;
+      }
+    }
   };
 };

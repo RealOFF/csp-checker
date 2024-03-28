@@ -5,7 +5,7 @@ import {
   ResourceType,
   BaseResourceFactoryOptions,
 } from "./resources.domain";
-import { configureElement } from "./resource.util";
+import { configureElement, createCspError } from "./resource.util";
 
 const createCommonFactory =
   (tag: "script" | "img" | "audio" | "iframe" | "video"): ResourceFactory =>
@@ -39,7 +39,9 @@ const fetchFactory: ResourceFactory = (
       options?.maxResourceLoadingTime || DEFAULT_MAX_RESOURCE_LOADING_TIME,
     );
 
-    document.defaultView.addEventListener("securitypolicyviolation", reject);
+    document.defaultView.addEventListener("securitypolicyviolation", () =>
+      reject(createCspError()),
+    );
   });
 
 const webSocketFactory: ResourceFactory = (
@@ -55,7 +57,7 @@ const webSocketFactory: ResourceFactory = (
     );
 
     ws.addEventListener("open", () => resolve());
-    ws.addEventListener("error", () => reject());
+    ws.addEventListener("error", () => reject(createCspError()));
   });
 
 const styleFactory: ResourceFactory = (
