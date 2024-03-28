@@ -12,7 +12,7 @@ export const createSandbox = (cspConfiguration: string) => {
   iframe.src = "about:blank";
 
   iframe.addEventListener("load", () => {
-    if (!iframe.contentWindow) {
+    if (iframe.contentWindow === null) {
       throw new Error("contentWindow is not defined");
     }
 
