@@ -2,10 +2,21 @@
   "name": "csp-checker",
   "version": "0.0.1",
   "type": "module",
+  "description": "A comprehensive library for testing and validating Content Security Policy (CSP)",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/RealOFF/csp-checker.git"
   },
+  "author": "Mikita Himpel <mikita.himpel@proton.me>",
+  "keywords": [
+    "CSP",
+    "Content Security Policy",
+    "web security",
+    "CSP testing",
+    "security",
+    "web development"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
