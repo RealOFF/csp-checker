@@ -8,6 +8,10 @@
     "type": "git",
     "url": "https://github.com/RealOFF/csp-checker.git"
   },
+  "bugs": {
+    "url": "https://github.com/RealOFF/csp-checker/issues"
+  },
+  "homepage": "https://github.com/RealOFF/csp-checker#readme",
   "author": "Mikita Himpel <mikita.himpel@proton.me>",
   "keywords": [
     "CSP",
