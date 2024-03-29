@@ -11,6 +11,9 @@
   "bugs": {
     "url": "https://github.com/RealOFF/csp-checker/issues"
   },
+  "main": "dist/lib.cjs.js",
+  "module": "dist/lib.esm.js",
+  "types": "dist/index.d.ts",
   "homepage": "https://github.com/RealOFF/csp-checker#readme",
   "author": "Mikita Himpel <mikita.himpel@proton.me>",
   "keywords": [
@@ -37,6 +40,7 @@
     "prettier": "3.2.5",
     "typescript": "^5.2.2",
     "vite": "^5.1.4",
+    "vite-plugin-dts": "^3.8.1",
     "vitest": "^1.4.0"
   }
 }
