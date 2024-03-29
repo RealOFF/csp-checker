@@ -24,6 +24,11 @@
   "main": "dist/lib.cjs.js",
   "module": "dist/lib.esm.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE.md"
+  ],
   "scripts": {
     "build": "tsc && vite build",
     "coverage": "vitest run --coverage",
