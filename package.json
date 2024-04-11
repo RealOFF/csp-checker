@@ -1,6 +1,6 @@
 {
   "name": "csp-checker",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A comprehensive library for testing and validating Content Security Policy (CSP)",
   "keywords": [
     "CSP",

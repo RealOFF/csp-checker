@@ -6,17 +6,30 @@ import {
   BaseResourceFactoryOptions,
   isCspError,
 } from "./resources";
+import { createIsSelfDirectiveSatisfied } from "./self-checker";
 
-type CheckOptions = BaseResourceFactoryOptions;
+type CheckOptions = BaseResourceFactoryOptions & { originUrl: string };
 
 export const createChecker = (cspConfiguration: string) => {
   const createResource = createResourceFactory();
+  const isSelfDirectiveSatisfied =
+    createIsSelfDirectiveSatisfied(cspConfiguration);
 
   return async (
     url: string,
     resourceType: ResourceType,
     options: CheckOptions,
   ) => {
+    if (
+      isSelfDirectiveSatisfied({
+        resourceUrl: url,
+        resourceType,
+        originUrl: options.originUrl,
+      })
+    ) {
+      return true;
+    }
+
     const sandbox = createSandbox(cspConfiguration);
     document.body.appendChild(sandbox);
 
